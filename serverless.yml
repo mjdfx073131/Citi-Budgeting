@@ -60,6 +60,14 @@ functions:
           path: todos/{Project_id}
           method: delete
           cors: true
+  query:
+    handler: todos/query.query
+    events:
+      - http:
+          path: todos/team/{team}
+          #services/{serviceId}/applications/{applicationId}
+          method: get
+          cors: true
 
 # resources:
 #   Resources:
