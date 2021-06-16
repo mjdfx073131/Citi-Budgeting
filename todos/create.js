@@ -1,6 +1,5 @@
 'use strict';
 
-const uuid = require('uuid');
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
@@ -10,9 +9,9 @@ module.exports.create = (event, context, callback) => {
   const data = JSON.parse(event.body);
 
   const params = {
-    TableName: team-budgeting-app-n14,
+    TableName: "budget-14-dev",
     Item: {
-      id: data.project_id,
+      Project_id: data.Project_id,
       team: data.team,
       team_manager: data.team_manager,
       project_type: data.project_type,
