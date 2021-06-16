@@ -39,7 +39,7 @@ module.exports.update = (event, context, callback) => {
       ':end_date': data.end_date,
       ':initial_budget': data.initial_budget,
       ':most_recent_request_amt': data.most_recent_request_amt,
-      ':net_amt_remaining': data.net_amt_remaining,
+      ':net_amt_remaining': data.initial_budget - data.most_recent_request_amt,
       ':project_id' : data.project_id,
       ':project_type' : data.project_type,
       ':start_date' : data.start_date,
