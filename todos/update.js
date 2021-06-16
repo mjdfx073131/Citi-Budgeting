@@ -9,11 +9,12 @@ module.exports.update = (event, context, callback) => {
   const data = JSON.parse(event.body);
 
   // validation
+  /** 
   if (typeof data.end_date !== 'string' 
   || typeof data.initial_budget !== 'number' 
   || typeof data.most_recent_request_amt !== 'number'
   || typeof data.net_amt_remaining !== 'number'
-  || typeof data.project_id !== 'number'
+  || typeof data.Project_id !== 'number'
   || typeof data.project_type !== 'string'
   || typeof data.start_date !== 'string'
   || typeof data.team !== 'string'
@@ -26,6 +27,7 @@ module.exports.update = (event, context, callback) => {
     });
     return;
   }
+  */
 
   const params = {
     TableName: "budget-14-dev",
@@ -34,17 +36,17 @@ module.exports.update = (event, context, callback) => {
     },
     ExpressionAttributeValues: {
       ':end_date': data.end_date,
-      ':initial_budget': data.initial_budget,
+      //':initial_budget': data.initial_budget,
       ':most_recent_request_amt': data.most_recent_request_amt,
-      ':net_amt_remaining': data.initial_budget - data.most_recent_request_amt,
-      ':project_id' : data.project_id,
-      ':project_type' : data.project_type,
-      ':start_date' : data.start_date,
-      ':team' : data.team,
+      //':net_amt_remaining': data.initial_budget - data.most_recent_request_amt,
+      //':project_id' : data.Project_id,
+      //':project_type' : data.project_type,
+      //':start_date' : data.start_date,
+      //':team' : data.team,
       ':team_manager' : data.team_manager,
     },
     //UpdateExpression: 'SET #todo_text = :text, checked = :checked, updatedAt = :updatedAt',
-    UpdateExpression: 'SET end_date = :end_date, initial_budget = :initial_budget, most_recent_request_amt = :most_recent_request_amt, net_amt_remaining = :net_amt_remaining, project_id = :project_id, project_type = :project_type, start_date = :start_date, team = :team, team_manager = :team_manager',
+    UpdateExpression: 'SET end_date = :end_date, most_recent_request_amt = :most_recent_request_amt, team_manager = :team_manager',
     ReturnValues: 'ALL_NEW',
   };
 
