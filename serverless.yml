@@ -1,11 +1,12 @@
-service: serverless-rest-api
+service: budget-14
 
 frameworkVersion: ">=1.1.0 <2.50.0"
 
 provider:
   name: aws
   runtime: nodejs14.x
-  region: us-east-1
+  region: us-west-1
+  stage: dev
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
   iamRoleStatements:
@@ -17,7 +18,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+      Resource: "arn:aws:dynamodb:us-west-1:429937773353:table/budget-14-dev"
 
 functions:
   create:
@@ -40,7 +41,7 @@ functions:
     handler: todos/get.get
     events:
       - http:
-          path: todos/{id}
+          path: todos/{Project_id}
           method: get
           cors: true
 
@@ -48,7 +49,7 @@ functions:
     handler: todos/update.update
     events:
       - http:
-          path: todos/{id}
+          path: todos/{Project_id}
           method: put
           cors: true
 
@@ -56,25 +57,25 @@ functions:
     handler: todos/delete.delete
     events:
       - http:
-          path: todos/{id}
+          path: todos/{Project_id}
           method: delete
           cors: true
 
-resources:
-  Resources:
-    TodosDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          -
-            AttributeName: id
-            AttributeType: S
-        KeySchema:
-          -
-            AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+# resources:
+#   Resources:
+#     BudgetDynamoDbTable:
+#       Type: 'AWS::DynamoDB::Table'
+#       DeletionPolicy: Retain
+#       Properties:
+#         AttributeDefinitions:
+#           -
+#             AttributeName: Project_id 
+#             AttributeType: S
+#         KeySchema:
+#           -
+#             AttributeName: Project_id 
+#             KeyType: HASH
+#         ProvisionedThroughput:
+#           ReadCapacityUnits: 1
+#           WriteCapacityUnits: 1
+#         TableName: ${self:provider.environment.DYNAMODB_TABLE}

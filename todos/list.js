@@ -4,7 +4,7 @@ const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-depe
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const params = {
-  TableName: process.env.DYNAMODB_TABLE,
+  TableName: "budget-14-dev",
 };
 
 module.exports.list = (event, context, callback) => {
@@ -16,7 +16,7 @@ module.exports.list = (event, context, callback) => {
       callback(null, {
         statusCode: error.statusCode || 501,
         headers: { 'Content-Type': 'text/plain' },
-        body: 'Couldn\'t fetch the todos.',
+        body: 'Couldn\'t fetch the table.',
       });
       return;
     }

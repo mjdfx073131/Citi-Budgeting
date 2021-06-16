@@ -28,13 +28,10 @@ module.exports.update = (event, context, callback) => {
   }
 
   const params = {
-    TableName: "team-budgeting-app-n14",
+    TableName: "budget-14-dev",
     Key: {
-      id: event.pathParameters.project_id,
+      Project_id: event.pathParameters.Project_id,
     },
-    //ExpressionAttributeNames: {
-      //'#todo_text': 'text',
-    //},
     ExpressionAttributeValues: {
       ':end_date': data.end_date,
       ':initial_budget': data.initial_budget,
