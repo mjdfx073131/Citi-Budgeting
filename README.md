@@ -1,2 +1,2 @@
-# CIti-Budgeting
+# Citi-Budgeting
 Citi budgeting cloud application
