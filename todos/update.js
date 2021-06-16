@@ -9,7 +9,15 @@ module.exports.update = (event, context, callback) => {
   const data = JSON.parse(event.body);
 
   // validation
-  if (typeof data.text !== 'string' || typeof data.checked !== 'boolean') {
+  if (typeof data.end_date !== 'string' 
+  || typeof data.initial_budget !== 'number' 
+  || typeof data.most_recent_request_amt !== 'number'
+  || typeof data.net_amt_remaining !== 'number'
+  || typeof data.project_id !== 'number'
+  || typeof data.project_type !== 'string'
+  || typeof data.start_date !== 'string'
+  || typeof data.team !== 'string'
+  || typeof data.team_manager !== 'string') {
     console.error('Validation Failed');
     callback(null, {
       statusCode: 400,
@@ -20,19 +28,26 @@ module.exports.update = (event, context, callback) => {
   }
 
   const params = {
-    TableName: process.env.DYNAMODB_TABLE,
+    TableName: "team-budgeting-app-n14",
     Key: {
-      id: event.pathParameters.id,
+      id: event.pathParameters.project_id,
     },
-    ExpressionAttributeNames: {
-      '#todo_text': 'text',
-    },
+    //ExpressionAttributeNames: {
+      //'#todo_text': 'text',
+    //},
     ExpressionAttributeValues: {
-      ':text': data.text,
-      ':checked': data.checked,
-      ':updatedAt': timestamp,
+      ':end_date': data.end_date,
+      ':initial_budget': data.initial_budget,
+      ':most_recent_request_amt': data.most_recent_request_amt,
+      ':net_amt_remaining': data.net_amt_remaining,
+      ':project_id' : data.project_id,
+      ':project_type' : data.project_type,
+      ':start_date' : data.start_date,
+      ':team' : data.team,
+      ':team_manager' : data.team_manager,
     },
-    UpdateExpression: 'SET #todo_text = :text, checked = :checked, updatedAt = :updatedAt',
+    //UpdateExpression: 'SET #todo_text = :text, checked = :checked, updatedAt = :updatedAt',
+    UpdateExpression: 'SET end_date = :end_date, initial_budget = :initial_budget, most_recent_request_amt = :most_recent_request_amt, net_amt_remaining = :net_amt_remaining, project_id = :project_id, project_type = :project_type, start_date = :start_date, team = :team, team_manager = :team_manager',
     ReturnValues: 'ALL_NEW',
   };
 
