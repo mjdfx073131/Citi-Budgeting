@@ -20,9 +20,9 @@ module.exports.update = (event, context, callback) => {
   }
 
   const params = {
-    TableName: process.env.DYNAMODB_TABLE,
+    TableName: "budget-14-dev",
     Key: {
-      id: event.pathParameters.id,
+      Project_id: event.pathParameters.Project_id,
     },
     ExpressionAttributeNames: {
       '#todo_text': 'text',
