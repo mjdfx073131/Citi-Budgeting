@@ -83,6 +83,7 @@ functions:
 
   update_request:
     handler: todos/get_all_request.updateR
+    
 # resources:
 #   Resources:
 #     BudgetDynamoDbTable:
