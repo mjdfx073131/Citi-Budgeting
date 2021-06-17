@@ -18,7 +18,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:us-west-1:429937773353:table/budget-14-dev"
+      Resource: "arn:aws:dynamodb:us-west-1:429937773353:table/budget-14-prd"
 
 functions:
   create:
@@ -41,7 +41,7 @@ functions:
     handler: todos/get.get
     events:
       - http:
-          path: todos/{Project_id}
+          path: todos/{project_id}
           method: get
           cors: true
 
@@ -49,7 +49,7 @@ functions:
     handler: todos/update.update
     events:
       - http:
-          path: todos/{Project_id}
+          path: todos/{project_id}
           method: put
           cors: true
 
@@ -57,7 +57,7 @@ functions:
     handler: todos/delete.delete
     events:
       - http:
-          path: todos/{Project_id}
+          path: todos/{project_id}
           method: delete
           cors: true
 
@@ -77,11 +77,11 @@ functions:
 #       Properties:
 #         AttributeDefinitions:
 #           -
-#             AttributeName: Project_id 
+#             AttributeName: project_id 
 #             AttributeType: S
 #         KeySchema:
 #           -
-#             AttributeName: Project_id 
+#             AttributeName: project_id 
 #             KeyType: HASH
 #         ProvisionedThroughput:
 #           ReadCapacityUnits: 1

@@ -6,9 +6,9 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.delete = (event, context, callback) => {
   const params = {
-    TableName: "budget-14-dev",
+    TableName: "budget-14-prd",
     Key: {
-      Project_id: event.pathParameters.Project_id,
+      project_id: event.pathParameters.project_id,
     },
   };
 
