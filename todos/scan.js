@@ -11,7 +11,7 @@ module.exports.scan = (event, context, callback) => {
 
     let params = {
         TableName: "budget-14-dev",
-        FilterExpression: "team = :team and net_amount_remaining > :net_amount_remaining",
+        FilterExpression: "team = :team and net_amount_remaining < :net_amount_remaining",
         ExpressionAttributeValues: {
             ":team": teamName,
             ":net_amount_remaining": net_amount_remaining,
