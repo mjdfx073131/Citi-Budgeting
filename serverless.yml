@@ -61,6 +61,14 @@ functions:
           method: delete
           cors: true
 
+  query:
+    handler: todos/scan.scan
+    events:
+      - http:
+          path: todos/team/{team}/net_amount_remaining/{net_amount_remaining+}
+          method: get
+          cors: true
+
 # resources:
 #   Resources:
 #     BudgetDynamoDbTable:
