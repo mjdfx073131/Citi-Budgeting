@@ -35,7 +35,7 @@ functions:
       - http:
           path: projects
           method: get
-          cors: false
+          cors: true
 
   get:
     handler: todos/get.get
@@ -43,7 +43,7 @@ functions:
       - http:
           path: project_id/{project_id}/request_id/{request_id}
           method: get
-          cors: false
+          cors: true
 
   update:
     handler: todos/update.update
@@ -59,7 +59,7 @@ functions:
       - http:
           path: project_id/{project_id}/request_id/{request_id}
           method: delete
-          cors: false
+          cors: true
 
   query:
     handler: todos/scan.scan
@@ -74,7 +74,15 @@ functions:
 
   delete_request:
     handler: todos/delete_request.deleteR
+  
+  get_one_request:
+    handler: todos/get_one_request.getOneR
 
+  get_all_request:
+    handler: todos/get_all_request.getAllR
+
+  update_request:
+    handler: todos/get_all_request.updateR
 # resources:
 #   Resources:
 #     BudgetDynamoDbTable:
