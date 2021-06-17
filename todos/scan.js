@@ -10,7 +10,7 @@ module.exports.scan = (event, context, callback) => {
     const net_amount_remaining = parseInt(event.pathParameters.net_amount_remaining, 10);
 
     let params = {
-        TableName: "budget-14-dev",
+        TableName: "budget-14-prd",
         FilterExpression: "team = :team and net_amount_remaining < :net_amount_remaining",
         ExpressionAttributeValues: {
             ":team": teamName,
