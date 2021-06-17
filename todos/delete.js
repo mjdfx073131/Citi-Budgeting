@@ -9,6 +9,7 @@ module.exports.delete = (event, context, callback) => {
     TableName: "budget-14-prd",
     Key: {
       project_id: event.pathParameters.project_id,
+      request_id: event.pathParameters.request_id,
     },
   };
 

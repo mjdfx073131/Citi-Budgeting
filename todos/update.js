@@ -5,7 +5,6 @@ const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-depe
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.update = (event, context, callback) => {
-  const timestamp = new Date().getTime();
   const data = JSON.parse(event.body);
 
   // validation
@@ -33,21 +32,22 @@ module.exports.update = (event, context, callback) => {
     TableName: "budget-14-prd",
     Key: {
       project_id: event.pathParameters.project_id,
+      request_id: event.pathParameters.request_id,
     },
     ExpressionAttributeValues: {
-      ':end_date': data.end_date,
       //':initial_budget': data.initial_budget,
-      ':most_recent_request_amt': data.most_recent_request_amt,
+      ":request_amount": data.request_amount,
       //':net_amt_remaining': data.initial_budget - data.most_recent_request_amt,
       //':project_id' : data.project_id,
       //':project_type' : data.project_type,
       //':start_date' : data.start_date,
       //':team' : data.team,
-      ':team_manager' : data.team_manager,
+      ":request_reason": data.request_reason,
     },
     //UpdateExpression: 'SET #todo_text = :text, checked = :checked, updatedAt = :updatedAt',
-    UpdateExpression: 'SET end_date = :end_date, most_recent_request_amt = :most_recent_request_amt, team_manager = :team_manager',
-    ReturnValues: 'ALL_NEW',
+    UpdateExpression:
+      "SET request_reason = :request_reason, request_amount = :request_amount, net_amount_remaining = net_amount_remaining - :request_amount",
+    ReturnValues: "ALL_NEW",
   };
 
   // update the todo in the database
