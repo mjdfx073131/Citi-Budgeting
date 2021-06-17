@@ -10,7 +10,7 @@ module.exports.scan = (event, context, callback) => {
     const net_amount_remaining = parseInt(event.pathParameters.net_amount_remaining, 10);
 
     let params = {
-        TableName: "budget-14-prd",
+        TableName: "budget-14-dev",
         FilterExpression: "team = :team and net_amount_remaining < :net_amount_remaining",
         ExpressionAttributeValues: {
             ":team": teamName,
@@ -29,8 +29,13 @@ module.exports.scan = (event, context, callback) => {
         }
 
         const response = {
-            statusCode: 200,
-            body: JSON.stringify(result.Items),
+          statusCode: 200,
+          headers: {
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "*",
+          },
+          body: JSON.stringify(result.Items),
         };
         callback(null, response);
     });

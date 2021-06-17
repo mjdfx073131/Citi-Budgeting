@@ -6,7 +6,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.delete = (event, context, callback) => {
   const params = {
-    TableName: "budget-14-prd",
+    TableName: "budget-14-dev",
     Key: {
       project_id: event.pathParameters.project_id,
       request_id: event.pathParameters.request_id,
@@ -29,6 +29,11 @@ module.exports.delete = (event, context, callback) => {
     // create a response
     const response = {
       statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "*",
+      },
       body: JSON.stringify({}),
     };
     callback(null, response);

@@ -4,7 +4,7 @@ const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-depe
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const params = {
-  TableName: "budget-14-prd",
+  TableName: "budget-14-dev",
 };
 
 module.exports.list = (event, context, callback) => {
@@ -24,6 +24,11 @@ module.exports.list = (event, context, callback) => {
     // create a response
     const response = {
       statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "*",
+      },
       body: JSON.stringify(result.Items),
     };
     callback(null, response);
