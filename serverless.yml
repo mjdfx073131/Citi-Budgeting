@@ -91,11 +91,11 @@ functions:
 #       Properties:
 #         AttributeDefinitions:
 #           -
-#             AttributeName: Project_id 
+#             AttributeName: project_id 
 #             AttributeType: S
 #         KeySchema:
 #           -
-#             AttributeName: Project_id 
+#             AttributeName: project_id 
 #             KeyType: HASH
 #         ProvisionedThroughput:
 #           ReadCapacityUnits: 1

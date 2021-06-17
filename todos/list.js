@@ -4,7 +4,7 @@ const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-depe
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const params = {
-  TableName: "budget-14-dev",
+  TableName: "budget-14-prd",
 };
 
 module.exports.list = (event, context, callback) => {
