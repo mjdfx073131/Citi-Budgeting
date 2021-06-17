@@ -5,16 +5,14 @@ const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-depe
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.update = (event, context, callback) => {
-  const timestamp = new Date().getTime();
   const data = JSON.parse(event.body);
 
   // validation
-  /** 
   if (typeof data.end_date !== 'string' 
   || typeof data.initial_budget !== 'number' 
   || typeof data.most_recent_request_amt !== 'number'
   || typeof data.net_amt_remaining !== 'number'
-  || typeof data.Project_id !== 'number'
+  || typeof data.Project_id !== 'string'
   || typeof data.project_type !== 'string'
   || typeof data.start_date !== 'string'
   || typeof data.team !== 'string'
@@ -23,12 +21,14 @@ module.exports.update = (event, context, callback) => {
     callback(null, {
       statusCode: 400,
       headers: { 'Content-Type': 'text/plain' },
-      body: 'Couldn\'t update the todo item.',
+      body: 'Couldn\'t update the item.',
     });
     return;
   }
-  */
 
+  const ExpressionAttributeValues = {
+    
+  }
   const params = {
     TableName: "budget-14-dev",
     Key: {

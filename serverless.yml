@@ -35,7 +35,7 @@ functions:
       - http:
           path: todos
           method: get
-          cors: true
+          cors: false
 
   get:
     handler: todos/get.get
@@ -43,7 +43,7 @@ functions:
       - http:
           path: todos/{Project_id}
           method: get
-          cors: true
+          cors: false
 
   update:
     handler: todos/update.update
@@ -51,7 +51,7 @@ functions:
       - http:
           path: todos/{Project_id}
           method: put
-          cors: true
+          cors: false
 
   delete:
     handler: todos/delete.delete
@@ -59,7 +59,7 @@ functions:
       - http:
           path: todos/{Project_id}
           method: delete
-          cors: true
+          cors: false
   query:
     handler: todos/query.query
     events:
@@ -67,7 +67,7 @@ functions:
           path: todos/team/{team}
           #services/{serviceId}/applications/{applicationId}
           method: get
-          cors: true
+          cors: false
 
 # resources:
 #   Resources:
