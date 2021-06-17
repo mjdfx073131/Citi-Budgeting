@@ -1,14 +1,14 @@
-service: budget-14
+service: budget-14-prd
 
 frameworkVersion: ">=1.1.0 <2.50.0"
 
 provider:
   name: aws
   runtime: nodejs14.x
-  region: us-west-1
-  stage: dev
-  environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+  region: us-east-1
+  stage: prd
+  # environment:
+  #   DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -18,14 +18,14 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:us-west-1:429937773353:table/budget-14-dev"
+      Resource: "arn:aws:dynamodb:us-east-1:429937773353:table/budget-14-dev"
 
 functions:
   create:
     handler: todos/create.create
     events:
       - http:
-          path: todos
+          path: projects
           method: post
           cors: true
 
@@ -33,23 +33,23 @@ functions:
     handler: todos/list.list
     events:
       - http:
-          path: todos
+          path: projects
           method: get
-          cors: true
+          cors: false
 
   get:
     handler: todos/get.get
     events:
       - http:
-          path: todos/{Project_id}
+          path: project_id/{project_id}/request_id/{request_id}
           method: get
-          cors: true
+          cors: false
 
   update:
     handler: todos/update.update
     events:
       - http:
-          path: todos/{Project_id}
+          path: project_id/{project_id}/request_id/{request_id}
           method: put
           cors: true
 
@@ -57,15 +57,15 @@ functions:
     handler: todos/delete.delete
     events:
       - http:
-          path: todos/{Project_id}
+          path: project_id/{project_id}/request_id/{request_id}
           method: delete
-          cors: true
+          cors: false
 
   query:
     handler: todos/scan.scan
     events:
       - http:
-          path: todos/team/{team}/net_amount_remaining/{net_amount_remaining+}
+          path: team/{team}/net_amount_remaining/{net_amount_remaining+}
           method: get
           cors: true
 

@@ -8,7 +8,8 @@ module.exports.delete = (event, context, callback) => {
   const params = {
     TableName: "budget-14-dev",
     Key: {
-      Project_id: event.pathParameters.Project_id,
+      project_id: event.pathParameters.project_id,
+      request_id: event.pathParameters.request_id,
     },
   };
 

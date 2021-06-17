@@ -11,7 +11,8 @@ module.exports.create = (event, context, callback) => {
   const params = {
     TableName: "budget-14-dev",
     Item: {
-      Project_id: data.Project_id,
+      project_id: data.project_id,
+      request_id: data.request_id,
       team: data.team,
       team_manager: data.team_manager,
       project_type: data.project_type,
