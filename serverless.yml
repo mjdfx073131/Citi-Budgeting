@@ -68,6 +68,12 @@ functions:
           path: team/{team}/net_amount_remaining/{net_amount_remaining+}
           method: get
           cors: true
+      
+  make_request:
+    handler: todos/make_request.makeR
+
+  delete_request:
+    handler: todos/delete_request.deleteR
 
 # resources:
 #   Resources:
