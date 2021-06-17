@@ -36,7 +36,7 @@ module.exports.update = (event, context, callback) => {
     },
     ExpressionAttributeValues: {
       //':initial_budget': data.initial_budget,
-      ":most_recent_request_amt": data.most_recent_request_amt,
+      ":request_amount": data.request_amount,
       //':net_amt_remaining': data.initial_budget - data.most_recent_request_amt,
       //':project_id' : data.Project_id,
       //':project_type' : data.project_type,
@@ -46,7 +46,7 @@ module.exports.update = (event, context, callback) => {
     },
     //UpdateExpression: 'SET #todo_text = :text, checked = :checked, updatedAt = :updatedAt',
     UpdateExpression:
-      "SET request_reason = :request_reason, most_recent_request_amt = :most_recent_request_amt, net_amount_remaining = net_amount_remaining - ::most_recent_request_amt",
+      "SET request_reason = :request_reason, request_amount = :request_amount, net_amount_remaining = net_amount_remaining - :request_amount",
     ReturnValues: "ALL_NEW",
   };
 
