@@ -32,7 +32,7 @@ function dispatch(intentRequest, callback) {
     },
   };
   // delete the project entry from the database
-  dynamoDb.get(params, (error, result) => {
+  dynamoDb.delete(params, (error, result) => {
     // handle potential errors
     if (error) {
       console.error(error);
