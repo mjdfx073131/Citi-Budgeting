@@ -2,9 +2,6 @@
 const aws = require("aws-sdk");
 const dynamoDb = new aws.DynamoDB.DocumentClient();
 var response = "";
-var lambda = new aws.Lambda({
-  region: "us-east-1",
-});
 // Close dialog with the customer, reporting fulfillmentState of Failed or Fulfilled ("Thanks, your pizza will arrive in 20 minutes")
 function close(sessionAttributes, fulfillmentState, message) {
   return {
@@ -49,42 +46,75 @@ function dispatch(intentRequest, callback) {
       statusCode: 200,
       body: result.Item,
     };
-    callback(null, response);
+      callback(
+        close(sessionAttributes, "Fulfilled", {
+          contentType: "PlainText",
+          content:
+            `Here are the details of your request:\r\n` +
+            "Request ID: " +
+            response.body["request_id"] +
+            "\r\n" +
+            "Project ID: " +
+            response.body["project_id"] +
+            "\r\n" +
+            "Start Date: " +
+            response.body["start_date"] +
+            "\r\n" +
+            "End Date: " +
+            response.body["end_date"] +
+            "\r\n" +
+            "Initial Budget: " +
+            response.body["initial_budget"] +
+            "\n" +
+            "Request Amount: " +
+            response.body["request_amount"] +
+            "\n" +
+            "Net Amount Remaining: " +
+            response.body["net_amount_remaining"] +
+            "\n" +
+            "Team: " +
+            response.body["team"] +
+            "\n" +
+            "Team Manager: " +
+            response.body["team_manager"] +
+            "\n",
+        })
+      );
   });
-  callback(
-    close(sessionAttributes, "Fulfilled", {
-      contentType: "PlainText",
-      content:
-        `Here are the details of your request:\r\n` +
-        "Request ID: " +
-        response.body["request_id"] +
-        "\r\n" +
-        "Project ID: " +
-        response.body["project_id"] +
-        "\r\n" +
-        "Start Date: " +
-        response.body["start_date"] +
-        "\r\n" +
-        "End Date: " +
-        response.body["end_date"] +
-        "\r\n" +
-        "Initial Budget: " +
-        response.body["initial_budget"] +
-        "\n" +
-        "Request Amount: " +
-        response.body["request_amount"] +
-        "\n" +
-        "Net Amount Remaining: " +
-        response.body["net_amount_remaining"] +
-        "\n" +
-        "Team: " +
-        response.body["team"] +
-        "\n" +
-        "Team Manager: " +
-        response.body["team_manager"] +
-        "\n",
-    })
-  );
+  // callback(
+  //   close(sessionAttributes, "Fulfilled", {
+  //     contentType: "PlainText",
+  //     content:
+  //       `Here are the details of your request:\r\n` +
+  //       "Request ID: " +
+  //       response.body["request_id"] +
+  //       "\r\n" +
+  //       "Project ID: " +
+  //       response.body["project_id"] +
+  //       "\r\n" +
+  //       "Start Date: " +
+  //       response.body["start_date"] +
+  //       "\r\n" +
+  //       "End Date: " +
+  //       response.body["end_date"] +
+  //       "\r\n" +
+  //       "Initial Budget: " +
+  //       response.body["initial_budget"] +
+  //       "\n" +
+  //       "Request Amount: " +
+  //       response.body["request_amount"] +
+  //       "\n" +
+  //       "Net Amount Remaining: " +
+  //       response.body["net_amount_remaining"] +
+  //       "\n" +
+  //       "Team: " +
+  //       response.body["team"] +
+  //       "\n" +
+  //       "Team Manager: " +
+  //       response.body["team_manager"] +
+  //       "\n",
+  //   })
+  // );
 }
 // --------------- Main handler -----------------------
 // Route the incoming request based on intent.

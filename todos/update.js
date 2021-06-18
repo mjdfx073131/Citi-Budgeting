@@ -7,27 +7,6 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 module.exports.update = (event, context, callback) => {
   const data = JSON.parse(event.body);
 
-  // validation
-  /** 
-  if (typeof data.end_date !== 'string' 
-  || typeof data.initial_budget !== 'number' 
-  || typeof data.most_recent_request_amt !== 'number'
-  || typeof data.net_amt_remaining !== 'number'
-  || typeof data.project_id !== 'number'
-  || typeof data.project_type !== 'string'
-  || typeof data.start_date !== 'string'
-  || typeof data.team !== 'string'
-  || typeof data.team_manager !== 'string') {
-    console.error('Validation Failed');
-    callback(null, {
-      statusCode: 400,
-      headers: { 'Content-Type': 'text/plain' },
-      body: 'Couldn\'t update the todo item.',
-    });
-    return;
-  }
-  */
-
   const params = {
     TableName: "budget-14-dev",
     Key: {
