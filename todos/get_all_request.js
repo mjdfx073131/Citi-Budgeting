@@ -1,9 +1,6 @@
 "use strict";
 const aws = require("aws-sdk");
 const dynamoDb = new aws.DynamoDB.DocumentClient();
-var lambda = new aws.Lambda({
-  region: "us-east-1",
-});
 // Close dialog with the customer, reporting fulfillmentState of Failed or Fulfilled ("Thanks, your pizza will arrive in 20 minutes")
 function close(sessionAttributes, fulfillmentState, message) {
   return {
@@ -38,14 +35,14 @@ function dispatch(intentRequest, callback) {
     // create a response
     const response = {
       statusCode: 200,
-      body: JSON.stringify(result.Items),
+      body: JSON.stringify(result.Items, null, 2),
     };
-  callback(
-    close(sessionAttributes, "Fulfilled", {
-      contentType: "PlainText",
-      content: response.body,
-    })
-  );
+    callback(
+      close(sessionAttributes, "Fulfilled", {
+        contentType: "PlainText",
+        content: response.body,
+      })
+    );
   });
   // callback(
   //   close(sessionAttributes, "Fulfilled", {

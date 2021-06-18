@@ -82,7 +82,7 @@ functions:
     handler: todos/get_all_request.getAllR
 
   update_request:
-    handler: todos/get_all_request.updateR
+    handler: todos/update_request.updateR
     
 # resources:
 #   Resources:
