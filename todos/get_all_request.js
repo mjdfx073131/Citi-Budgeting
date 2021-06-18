@@ -23,10 +23,6 @@ function dispatch(intentRequest, callback) {
   const sessionAttributes = intentRequest.sessionAttributes;
   const params = {
     TableName: "budget-14-dev",
-    Key: {
-      project_id: project_id,
-      request_id: request_id,
-    },
   };
   dynamoDb.scan(params, (error, result) => {
     // handle potential errors
@@ -44,14 +40,19 @@ function dispatch(intentRequest, callback) {
       statusCode: 200,
       body: JSON.stringify(result.Items),
     };
-    callback(null, response);
-  });
   callback(
     close(sessionAttributes, "Fulfilled", {
       contentType: "PlainText",
-      content: `Okay, request made for project ${project_id} in the amount of ${request_amount}. Your request_id is ${request_id}. Please retain this number for future use.`,
+      content: response.body,
     })
   );
+  });
+  // callback(
+  //   close(sessionAttributes, "Fulfilled", {
+  //     contentType: "PlainText",
+  //     content: `Okay, request made for project ${project_id} in the amount of ${request_amount}. Your request_id is ${request_id}. Please retain this number for future use.`,
+  //   })
+  // );
 }
 // --------------- Main handler -----------------------
 // Route the incoming request based on intent.

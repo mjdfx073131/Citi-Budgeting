@@ -73,10 +73,10 @@ function dispatch(intentRequest, callback) {
 // --------------- Main handler -----------------------
 // Route the incoming request based on intent.
 // The JSON body of the request is provided in the event slot.
-module.exports.updateR = (event, context, callback) => {
+module.exports.updateR = async (event, context, callback) => {
   try {
     dispatch(event, (response) => {
-      callback(null, response);
+        callback(null, response);
     });
   } catch (err) {
     callback(err);
