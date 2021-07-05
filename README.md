@@ -20,7 +20,7 @@ It is essential for teams within Citi to have a budget planned for each project 
 - [Repo](https://github.com/LinlinlinlinW/Citi-Budgeting-FE)
 
 # Back-End
-- AWS lambda
+- AWS Lambda
 - API Gateway
 - DynamoDB
 - Amazon Lex
