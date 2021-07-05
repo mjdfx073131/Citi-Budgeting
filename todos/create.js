@@ -15,11 +15,12 @@ module.exports.create = (event, context, callback) => {
       request_id: data.request_id,
       team: data.team,
       team_manager: data.team_manager,
-      project_type: data.project_type,
+      request_reason: data.request_reason,
       start_date: data.start_date,
       end_date: data.end_date,
       initial_budget: data.initial_budget,
-      net_amount_remaining: data.net_amount_remaining
+      net_amount_remaining: data.net_amount_remaining,
+      most_recent_request_amt: data.most_recent_request_amt
     },
   };
 
